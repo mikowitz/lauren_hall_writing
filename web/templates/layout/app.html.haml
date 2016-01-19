@@ -1,0 +1,30 @@
+!!!
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    %meta(name="description" content="")
+    %meta(name="author" content="")
+
+    - css_path = static_path(@conn, "/css/app.css")
+    %link(rel="stylesheet" href="#{css_path}")
+
+    %title
+      Lauren Hall Writing
+
+  %body
+    %main(role="main")
+      #main-content
+        %nav
+          %ul.pager
+            %li= link "Home", to: "/"
+            %li= link "About", to: "/about"
+            %li= link "Work", to: "/work"
+            %li= link "Awards", to: "/awards"
+            %li= link "Contact", to: "/contact"
+
+        = render @view_module, @view_template, assigns
+
+    - js_path = static_path(@conn, "/js/app.js")
+    %script(src="#{js_path}")

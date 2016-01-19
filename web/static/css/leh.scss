@@ -1,0 +1,58 @@
+body {
+  background-color: #ccc;
+  font-family: "Georgia", "Times New Roman", serif;
+	color: #000;
+}
+
+.row {
+  padding-bottom: 20px;
+}
+
+#main-content {
+ 	width: 80%;
+	margin: 50px auto;
+	background: #fff;
+	border: 1px solid #aaa;
+	padding: 1em;
+	min-height: 800px;
+  padding-bottom: 50px;
+}
+
+.title {
+  margin: 0;
+	padding: 0;
+	font-family: "Courier New", "Courier", "Georgia", serif;;
+	font-size: 48px;
+  padding-bottom: 20px;
+}
+
+img {
+  max-width: 80%;
+}
+
+.pager {
+  padding-bottom: 20px;
+  li {
+    padding: 0 20px;
+    font-size: 14pt;
+
+    a {
+      color: #000;
+      border: none;
+
+      &:hover, &:focus {
+        background-color: #fff;
+        text-decoration: underline;
+      }
+
+      &:hover {
+        color: #aaa;
+      }
+
+    }
+  }
+}
+
+.bio {
+  font-size: 1.5em;
+}
