@@ -1,0 +1,30 @@
+= form_for @changeset, award_path(@conn, :create), fn f ->
+  %h2 New Award
+
+  = if f.errors != [] do
+    .alert.alert-danger
+      %p Oops, something went wrong!
+      %ul
+        = for {attr, message} <- f.errors do
+          %li
+            %b
+              = "#{humanize(attr)} "
+            = translate_error message
+        - end
+  - end
+
+  .form-group
+    = text_input f, :title, placeholder: "Title", class: "form-control"
+
+  .form-group
+    = textarea f, :description, placeholder: "Description", class: "form-control"
+
+    %h3 Preview
+    #preview
+
+  .form-group
+    = select f, :year, (2000..2050)
+
+  .form-group
+    = submit "Add Award", class: "btn btn-primary"
+- end

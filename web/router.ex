@@ -21,6 +21,10 @@ defmodule LaurenHallWriting.Router do
     get "/work", PageController, :work
     get "/awards", PageController, :awards
     get "/contact", PageController, :contact
+
+    resources "/awards", AwardController
+
+    get "/markdown", MarkdownController, :index
   end
 
   # Other scopes may use custom stacks.
