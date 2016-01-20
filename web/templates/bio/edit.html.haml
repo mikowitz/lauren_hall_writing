@@ -1,0 +1,11 @@
+= form_for @changeset, bio_path(@conn, :update, @bio), fn f ->
+  .form-group
+    = textarea f, :content, placeholder: "bio", class: "form-control", rows: 10
+
+    %h2 Preview
+    = Earmark.to_html(@bio.content)
+
+  .form-group
+    = submit "Add bio", class: "btn btn-primary"
+
+- end

@@ -7,6 +7,7 @@ defmodule LaurenHallWriting.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug LaurenHallWriting.Auth, repo: LaurenHallWriting.Repo
   end
 
   pipeline :api do
@@ -22,9 +23,18 @@ defmodule LaurenHallWriting.Router do
     get "/awards", PageController, :awards
     get "/contact", PageController, :contact
 
-    resources "/awards", AwardController
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
+
 
     get "/markdown", MarkdownController, :index
+    get "/admin", SessionController, :new
+  end
+
+  scope "/admin", LaurenHallWriting do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/awards", AwardController
+    resources "/bio", BioController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,10 @@
+= form_for @conn, session_path(@conn, :create), [as: :session], fn f ->
+  .form-group
+    = text_input f, :username, placeholder: "username", class: "form-control"
+
+  .form-group
+    = password_input f, :password, placeholder: "password", class: "form-control"
+
+  .form-group
+    = submit "Log in", class: "btn btn-primary"
+- end

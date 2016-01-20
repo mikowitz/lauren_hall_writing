@@ -32,12 +32,40 @@ img {
 
 .pager {
   padding-bottom: 20px;
+
+  &.site-nav {
+    a {
+      color: #000;
+      border: none;
+
+      &:hover, &:focus {
+        background-color: #fff;
+        text-decoration: underline;
+      }
+
+      &:hover {
+        color: #aaa;
+      }
+    }
+  }
+
+  &.admin {
+    padding-bottom: 10px;
+    border-bottom: 1px s
+    li {
+      font-size: 12pt;
+
+      a {
+        color: blue;
+      }
+    }
+  }
+
   li {
     padding: 0 20px;
     font-size: 14pt;
 
     a {
-      color: #000;
       border: none;
 
       &:hover, &:focus {
@@ -54,5 +82,5 @@ img {
 }
 
 .bio {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }

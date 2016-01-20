@@ -24,7 +24,7 @@ exports.config = {
       joinTo: "css/app.css"
     },
     templates: {
-      joinTo: "js/app.js"
+      joinTo: "js/test.js"
     }
   },
 

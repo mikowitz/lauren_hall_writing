@@ -8,7 +8,9 @@ MarkdownParser = class MarkdownParser
         markdown: @markdown
       dataType: "json",
       method: "GET",
-      success: (resp) -> $("#preview").html(resp.html)
+      success: (resp) ->
+        console.log(resp.html)
+        # $("#preview").html(resp.html)
     )
 
 module.exports =

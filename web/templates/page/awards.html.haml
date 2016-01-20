@@ -1,3 +1,8 @@
+%ul
+  = for award <- @awards do
+    %li= "#{award.year} #{award.title}"
+  - end
+
 %p
   %h1.title.text-center
     Awards.

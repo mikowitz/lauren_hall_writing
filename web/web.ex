@@ -36,6 +36,7 @@ defmodule LaurenHallWriting.Web do
 
       import LaurenHallWriting.Router.Helpers
       import LaurenHallWriting.Gettext
+      import LaurenHallWriting.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +59,8 @@ defmodule LaurenHallWriting.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import LaurenHallWriting.Auth, only: [authenticate_user: 2]
     end
   end
 

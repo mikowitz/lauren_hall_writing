@@ -19,14 +19,13 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
-import { MarkdownParser } from "./markdown_parser"
+// import { MarkdownParser } from "./markdown_parser"
+// console.log("OK");
 
-$(document).ready(function() {
-    // console.log("OK");
-    // console.log(new MarkdownParser("## test"))
+import { Greet } from "web/static/js/greeter";
 
-    $("textarea#award_description").on("keyup blur", function() {
-        var parser = new MarkdownParser($(this).val())
-        parser.parse()
-    });
-});
+export var App = {
+    run: function() {
+        Greet.greet()
+    }
+}

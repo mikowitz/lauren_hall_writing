@@ -18,7 +18,14 @@
     %main(role="main")
       #main-content
         %nav
-          %ul.pager
+          = if @current_user do
+            %ul.pager.admin
+              %li= "ADMIN - #{@current_user.username}"
+              %li= link "Bio", to: bio_path(@conn, :new)
+              %li= link "Awards", to: award_path(@conn, :index)
+              %li= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete"
+          - end
+          %ul.pager.site-nav
             %li= link "Home", to: "/"
             %li= link "About", to: "/about"
             %li= link "Work", to: "/work"
@@ -29,3 +36,4 @@
 
     - js_path = static_path(@conn, "/js/app.js")
     %script(src="#{js_path}")
+    <script>require("web/static/js/app").App.run()</script>

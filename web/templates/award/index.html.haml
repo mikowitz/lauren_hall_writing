@@ -1,0 +1,6 @@
+= link "Add award", to: award_path(@conn, :new)
+
+%ul
+  = for award <- @awards do
+    %li= link award.title, to: award_path(@conn, :edit, award)
+  - end
