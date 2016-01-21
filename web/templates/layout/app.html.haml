@@ -1,0 +1,37 @@
+!!!
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    %meta(name="description" content="")
+    %meta(name="author" content="")
+
+    %title Lauren Hall Writing
+
+    - css_path = static_path(@conn, "/css/app.css")
+    %link(rel="stylesheet" href="#{css_path}")
+
+
+  %body
+    .container
+      #lauren-hall
+        %header.header
+          %nav(role="navigation")
+            %ul.pager
+              %li= link "Home", to: page_path(@conn, :index)
+              %li= link "About", to: page_path(@conn, :about)
+              %li= link "Work", to: page_path(@conn, :work)
+              %li= link "Awards", to: page_path(@conn, :awards)
+              %li= link "Contact", to: page_path(@conn, :contact)
+
+        %main(role="main")
+          = render @view_module, @view_template, assigns
+
+
+
+    - js_path = static_path(@conn, "/js/app.js")
+    %script(src="#{js_path}")
+
+      -# %p.alert.alert-info(role="alert")= get_flash(@conn, :info)
+      -# %p.alert.alert-danger(role="alert")= get_flash(@conn, :error)

@@ -1,0 +1,49 @@
+body {
+  background: #ccc;
+	font-family: "Georgia", "Times New Roman", serif;
+	color: #000;
+}
+
+.container {
+  @media (min-width: 768px) {
+    max-width: 1170px;
+  }
+}
+
+#lauren-hall {
+  background-color: white;
+  border: 1px solid #aaa;
+  padding: 20px;
+}
+
+.pager {
+  li {
+    padding: 0 20px;
+
+    a {
+      border: none;
+      color: #000;
+      font-size: 14pt;
+
+      &:hover {
+        background: none;
+        text-decoration: underline;
+        color: #ccc;
+      }
+    }
+  }
+}
+
+#roar {
+  widtH: 80%;
+  max-width: 600px;
+}
+
+.title {
+	margin: 0;
+	padding: 0;
+	font-family: "Courier New", "Courier", "Georgia", serif;;
+	font-size: 48px;
+	font-weight: normal;
+	color: #000;
+}
