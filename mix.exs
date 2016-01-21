@@ -19,7 +19,7 @@ defmodule LaurenHallWriting.Mixfile do
   def application do
     [mod: {LaurenHallWriting, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,6 +37,7 @@ defmodule LaurenHallWriting.Mixfile do
      {:phoenix_haml, github: "chrismccord/phoenix_haml", override: true},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
+     {:comeonin, "~> 1.2"},
      {:cowboy, "~> 1.0"}]
   end
 

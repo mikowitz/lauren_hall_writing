@@ -14,9 +14,18 @@
 
 
   %body
+    %p.alert.alert-info(role="alert")= get_flash(@conn, :info)
+    %p.alert.alert-danger(role="alert")= get_flash(@conn, :error)
+
     .container
       #lauren-hall
         %header.header
+          = if @current_user do
+            %nav(role="navigation")
+              %ul.pager.admin
+                %li= @current_user.username
+                %li= link "sign out", to: session_path(@conn, :delete, @current_user), method: :delete
+          - end
           %nav(role="navigation")
             %ul.pager
               %li= link "Home", to: page_path(@conn, :index)
@@ -32,6 +41,3 @@
 
     - js_path = static_path(@conn, "/js/app.js")
     %script(src="#{js_path}")
-
-      -# %p.alert.alert-info(role="alert")= get_flash(@conn, :info)
-      -# %p.alert.alert-danger(role="alert")= get_flash(@conn, :error)
