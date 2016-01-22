@@ -32,6 +32,7 @@ defmodule LaurenHallWriting.Router do
 
     resources "/bio", BioController, singleton: true, except: [:index, :delete]
     resources "/awards", AwardController
+    resources "/publications", PublicationController
   end
 
   # Other scopes may use custom stacks.

@@ -2,6 +2,7 @@ defmodule LaurenHallWriting.PageController do
   use LaurenHallWriting.Web, :controller
   alias LaurenHallWriting.Award
   alias LaurenHallWriting.Bio
+  alias LaurenHallWriting.Publication
 
   def about(conn, _params) do
     case Repo.one(from b in Bio, limit: 1) do
@@ -14,7 +15,8 @@ defmodule LaurenHallWriting.PageController do
   end
 
   def work(conn, _params) do
-    render conn, "work.html"
+    publications = Repo.all(from p in Publication, order_by: [asc: p.position])
+    render conn, "work.html", publications: publications
   end
 
   def awards(conn, _params) do

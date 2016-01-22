@@ -1,0 +1,27 @@
+= link "Add publication", to: publication_path(@conn, :new)
+
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Position
+      %th &nbsp;
+      %th &nbsp;
+  %tbody
+    = for publication <- @publications do
+      %tr
+        %td= link publication.title |> Earmark.to_html |> raw, to: publication_path(@conn, :edit, publication)
+        %td= publication.position
+        %td
+          = if publication.position < LaurenHallWriting.Publication.last_position do
+            = link to: publication_path(@conn, :update, publication, publication: [direction: :down]), method: :patch do
+              %i.fa.fa-caret-down
+            - end
+          - end
+        %td
+          = if publication.position > 1 do
+            = link to: publication_path(@conn, :update, publication, publication: [direction: :up]), method: :patch do
+              %i.fa.fa-caret-up
+            - end
+          - end
+    - end

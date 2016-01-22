@@ -1,0 +1,19 @@
+.publication-form
+  = form_for @changeset, publication_path(@conn, :create), fn f ->
+    .form-group
+      = text_input f, :title, placeholder: "title", class: "form-control pub-title"
+
+    .form-group
+      = text_input f, :journal, placeholder: "journal", class: "form-control pub-journal"
+
+    .form-group
+      = text_input f, :link, placeholder: "link", class: "form-control pub-link"
+
+    .form-group
+      = text_input f, :issue, placeholder: "issue", class: "form-control pub-issue"
+
+    .preview.pub-preview
+
+    .form-group
+      = submit "Add publication", class: "btn btn-primary"
+  - end

@@ -1,1 +1,5 @@
-OK
+= for publication <- @publications do
+  .row.publications
+    .col-xs-5.col-xs-offset-2.publication
+      = LaurenHallWriting.Publication.to_markdown(publication) |> from_markdown
+- end

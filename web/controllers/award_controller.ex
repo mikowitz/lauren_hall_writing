@@ -28,11 +28,6 @@ defmodule LaurenHallWriting.AwardController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    award = Repo.get!(Award, id)
-    render(conn, "show.html", award: award)
-  end
-
   def edit(conn, %{"id" => id}) do
     award = Repo.get!(Award, id)
     changeset = Award.changeset(award)
@@ -62,19 +57,6 @@ defmodule LaurenHallWriting.AwardController do
       {:error, changeset} ->
         render(conn, "edit.html", award: award, changeset: changeset)
     end
-  end
-
-  def move(conn, %{"id" => id}) do
-    redirect(conn, to: award_path(conn, :index))
-  end
-
-
-  def move_down(conn, %{"id" => id}) do
-    redirect(conn, to: award_path(conn, :index))
-  end
-
-  def move_up(conn, %{"id" => id}) do
-    redirect(conn, to: award_path(conn, :index))
   end
 
   def delete(conn, %{"id" => id}) do
