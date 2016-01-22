@@ -1,0 +1,15 @@
+= form_for @changeset, award_path(@conn, :update, @award), fn f ->
+  .form-group
+    = textarea f, :title, placeholder: "title", rows: 1, class: "form-control"
+
+    .preview
+
+  .form-group
+    = textarea f, :description, placeholder: "description", class: "form-control"
+
+    .preview
+
+  .form-group
+    = submit "Update award", class: "btn btn-primary"
+
+- end

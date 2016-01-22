@@ -41,6 +41,7 @@ exports.config = {
     watched: [
       "deps/phoenix/web/static",
       "deps/phoenix_html/web/static",
+      "node_modules/micromarkdown",
       "web/static",
       "test/static"
     ],

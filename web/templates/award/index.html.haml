@@ -1,0 +1,21 @@
+= link "Add award", to: award_path(@conn, :new)
+
+%table.table
+  %thead
+    %tr
+      %th Award
+      %th Position
+      %th &nbsp;
+  %tbody
+    = for award <- @awards do
+      %tr
+        %td= link award.title |> Earmark.to_html |> raw, to: award_path(@conn, :edit, award)
+        %td= award.position
+        %td
+          = if award.position < LaurenHallWriting.Award.last_position do
+            Move down
+          - end
+          = if award.position > 1 do
+            Move up
+          - end
+    - end

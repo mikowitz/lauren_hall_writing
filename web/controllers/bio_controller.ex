@@ -1,5 +1,6 @@
 defmodule LaurenHallWriting.BioController do
   use LaurenHallWriting.Web, :controller
+  import Ecto.Query
 
   alias LaurenHallWriting.Bio
 
@@ -7,12 +8,19 @@ defmodule LaurenHallWriting.BioController do
 
   def index(conn, _params) do
     bios = Repo.all(Bio)
-    render(conn, "index.html", bios: bios)
+    # render(conn, "index.html", bios: bios)
+    redirect(conn, to: bio_path(conn, :new))
   end
 
   def new(conn, _params) do
-    changeset = Bio.changeset(%Bio{})
-    render(conn, "new.html", changeset: changeset)
+    case Repo.one(from b in Bio, limit: 1) do
+      nil ->
+        changeset = Bio.changeset(%Bio{})
+        render(conn, "new.html", changeset: changeset)
+      bio ->
+        conn
+        |> redirect(to: bio_path(conn, :edit, bio))
+    end
   end
 
   def create(conn, %{"bio" => bio_params}) do
@@ -26,11 +34,6 @@ defmodule LaurenHallWriting.BioController do
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
-  end
-
-  def show(conn, %{"id" => id}) do
-    bio = Repo.get!(Bio, id)
-    render(conn, "show.html", bio: bio)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -47,7 +50,7 @@ defmodule LaurenHallWriting.BioController do
       {:ok, bio} ->
         conn
         |> put_flash(:info, "Bio updated successfully.")
-        |> redirect(to: bio_path(conn, :show, bio))
+        |> redirect(to: bio_path(conn, :edit, bio))
       {:error, changeset} ->
         render(conn, "edit.html", bio: bio, changeset: changeset)
     end

@@ -47,3 +47,16 @@ body {
 	font-weight: normal;
 	color: #000;
 }
+
+.preview {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.4em;
+}
+
+textarea.form-control {
+  font-size: 1.4em;
+}

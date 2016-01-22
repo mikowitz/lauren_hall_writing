@@ -1,0 +1,9 @@
+= form_for @changeset, bio_path(@conn, :create), fn f ->
+  .form-group
+    = textarea f, :content, class: "form-control"
+
+    .preview
+
+  .form-group
+    = submit "Update bio", class: "btn btn-primary"
+ - end

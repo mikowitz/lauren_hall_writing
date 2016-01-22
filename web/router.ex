@@ -17,17 +17,21 @@ defmodule LaurenHallWriting.Router do
   scope "/", LaurenHallWriting do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    get "/about", PageController, :about
+    get "/", PageController, :about
     get "/work", PageController, :work
     get "/awards", PageController, :awards
     get "/contact", PageController, :contact
 
-    resources "/bio", BioController
-
     resources "/session", SessionController, only: [:new, :create, :delete]
 
     get "/admin", SessionController, :new
+  end
+
+  scope "/admin", LaurenHallWriting do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/bio", BioController
+    resources "/awards", AwardController
   end
 
   # Other scopes may use custom stacks.

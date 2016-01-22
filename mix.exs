@@ -37,6 +37,7 @@ defmodule LaurenHallWriting.Mixfile do
      {:phoenix_haml, github: "chrismccord/phoenix_haml", override: true},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
+     {:earmark, "~> 0.2.0"},
      {:comeonin, "~> 1.2"},
      {:cowboy, "~> 1.0"}]
   end
