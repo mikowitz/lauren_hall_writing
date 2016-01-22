@@ -1,66 +1,70 @@
 defmodule LaurenHallWriting.BioControllerTest do
   use LaurenHallWriting.ConnCase
 
+  setup %{conn: conn} = config do
+    if username = config[:public] do
+      :ok
+    else
+      user = insert_user(username: username)
+      conn = assign(conn(), :current_user, user)
+      {:ok, conn: conn, user: user}
+    end
+  end
+
   alias LaurenHallWriting.Bio
   @valid_attrs %{content: "some content"}
   @invalid_attrs %{}
 
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, bio_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing bios"
-  end
-
   test "renders form for new resources", %{conn: conn} do
     conn = get conn, bio_path(conn, :new)
-    assert html_response(conn, 200) =~ "New bio"
+    assert html_response(conn, 200)
+  end
+
+  test "redirects from new to edit when bio exists", %{conn: conn} do
+    Repo.insert! Bio.changeset(%Bio{}, @valid_attrs)
+    conn = get conn, bio_path(conn, :new)
+    assert redirected_to(conn) == bio_path(conn, :edit)
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
     conn = post conn, bio_path(conn, :create), bio: @valid_attrs
-    assert redirected_to(conn) == bio_path(conn, :index)
+    assert redirected_to(conn) == bio_path(conn, :edit)
     assert Repo.get_by(Bio, @valid_attrs)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, bio_path(conn, :create), bio: @invalid_attrs
-    assert html_response(conn, 200) =~ "New bio"
-  end
-
-  test "shows chosen resource", %{conn: conn} do
-    bio = Repo.insert! %Bio{}
-    conn = get conn, bio_path(conn, :show, bio)
-    assert html_response(conn, 200) =~ "Show bio"
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      get conn, bio_path(conn, :show, -1)
-    end
+    assert html_response(conn, 200)
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    bio = Repo.insert! %Bio{}
-    conn = get conn, bio_path(conn, :edit, bio)
-    assert html_response(conn, 200) =~ "Edit bio"
+    Repo.insert! Bio.changeset(%Bio{}, @valid_attrs)
+    conn = get conn, bio_path(conn, :edit)
+    assert html_response(conn, 200)
+  end
+
+  test "redirects from edit to new when no bio exists", %{conn: conn} do
+    conn = get conn, bio_path(conn, :edit)
+    assert redirected_to(conn) == bio_path(conn, :new)
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    bio = Repo.insert! %Bio{}
-    conn = put conn, bio_path(conn, :update, bio), bio: @valid_attrs
-    assert redirected_to(conn) == bio_path(conn, :show, bio)
+    Repo.insert! %Bio{}
+    conn = put conn, bio_path(conn, :update), bio: @valid_attrs
+    assert redirected_to(conn) == bio_path(conn, :edit)
     assert Repo.get_by(Bio, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    bio = Repo.insert! %Bio{}
-    conn = put conn, bio_path(conn, :update, bio), bio: @invalid_attrs
-    assert html_response(conn, 200) =~ "Edit bio"
+    Repo.insert! %Bio{}
+    conn = put conn, bio_path(conn, :update), bio: @invalid_attrs
+    assert html_response(conn, 200)
   end
 
-  test "deletes chosen resource", %{conn: conn} do
-    bio = Repo.insert! %Bio{}
-    conn = delete conn, bio_path(conn, :delete, bio)
-    assert redirected_to(conn) == bio_path(conn, :index)
-    refute Repo.get(Bio, bio.id)
+  @tag :public
+  test "redirects home if there's no admin signed in", %{conn: conn} do
+    conn = get conn, bio_path(conn, :new)
+    assert redirected_to(conn) == page_path(conn, :about)
   end
+
 end

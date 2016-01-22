@@ -30,7 +30,7 @@ defmodule LaurenHallWriting.Router do
   scope "/admin", LaurenHallWriting do
     pipe_through [:browser, :authenticate_user]
 
-    resources "/bio", BioController
+    resources "/bio", BioController, singleton: true, except: [:index, :delete]
     resources "/awards", AwardController
   end
 

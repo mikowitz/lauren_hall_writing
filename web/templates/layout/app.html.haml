@@ -25,6 +25,7 @@
               %ul.pager.admin
                 %li= @current_user.username
                 %li= link "edit bio", to: bio_path(@conn, :new)
+                %li= link "edit awards", to: award_path(@conn, :index)
                 %li= link "sign out", to: session_path(@conn, :delete, @current_user), method: :delete
           - end
           %nav(role="navigation")

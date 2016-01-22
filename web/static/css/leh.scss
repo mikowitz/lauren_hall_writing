@@ -1,6 +1,5 @@
 body {
   background: #ccc;
-	font-family: "Georgia", "Times New Roman", serif;
 	color: #000;
 }
 
@@ -39,15 +38,6 @@ body {
   max-width: 600px;
 }
 
-.title {
-	margin: 0;
-	padding: 0;
-	font-family: "Courier New", "Courier", "Georgia", serif;;
-	font-size: 48px;
-	font-weight: normal;
-	color: #000;
-}
-
 .preview {
   margin: 20px 0;
   padding: 20px;
@@ -59,4 +49,20 @@ body {
 
 textarea.form-control {
   font-size: 1.4em;
+}
+
+.award {
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  .title {
+    font-size: 1.5em;
+    font-weight: 900 !important;
+  }
+}
+
+.awards:last-of-type {
+  .award {
+    border-bottom: none;
+  }
 }

@@ -1,1 +1,8 @@
-awards
+= for {award, index} <- Enum.with_index(@awards) do
+  .row.awards
+    .col-sm-8.col-sm-offset-2.award
+      .title
+        = award.title |> from_markdown
+      .description
+        = award.description |> from_markdown
+- end

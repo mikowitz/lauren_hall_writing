@@ -6,7 +6,7 @@ defmodule LaurenHallWriting.AwardController do
   plug :scrub_params, "award" when action in [:create, :update]
 
   def index(conn, _params) do
-    awards = Repo.all(Award)
+    awards = Repo.all(from a in Award, order_by: [asc: a.position])
     render(conn, "index.html", awards: awards)
   end
 
@@ -39,6 +39,17 @@ defmodule LaurenHallWriting.AwardController do
     render(conn, "edit.html", award: award, changeset: changeset)
   end
 
+  def update(conn, %{"id" => id, "award" => %{"direction" => direction}}) do
+    award = Repo.get!(Award, id)
+    case direction do
+      "up" ->
+        Award.move_up(award)
+      "down" ->
+        Award.move_down(award)
+    end
+    redirect(conn, to: award_path(conn, :index))
+  end
+
   def update(conn, %{"id" => id, "award" => award_params}) do
     award = Repo.get!(Award, id)
     changeset = Award.changeset(award, award_params)
@@ -51,6 +62,19 @@ defmodule LaurenHallWriting.AwardController do
       {:error, changeset} ->
         render(conn, "edit.html", award: award, changeset: changeset)
     end
+  end
+
+  def move(conn, %{"id" => id}) do
+    redirect(conn, to: award_path(conn, :index))
+  end
+
+
+  def move_down(conn, %{"id" => id}) do
+    redirect(conn, to: award_path(conn, :index))
+  end
+
+  def move_up(conn, %{"id" => id}) do
+    redirect(conn, to: award_path(conn, :index))
   end
 
   def delete(conn, %{"id" => id}) do

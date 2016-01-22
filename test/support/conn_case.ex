@@ -25,6 +25,7 @@ defmodule LaurenHallWriting.ConnCase do
       import Ecto.Query, only: [from: 2]
 
       import LaurenHallWriting.Router.Helpers
+      import LaurenHallWriting.TestHelpers
 
       # The default endpoint for testing
       @endpoint LaurenHallWriting.Endpoint

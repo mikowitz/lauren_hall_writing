@@ -49,7 +49,7 @@ defmodule LaurenHallWriting.Auth do
       conn
     else
       conn
-      |> redirect(to: Helpers.page_path(conn, :index))
+      |> redirect(to: Helpers.page_path(conn, :about))
       |> halt()
     end
   end

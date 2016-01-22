@@ -20,6 +20,7 @@ defmodule LaurenHallWriting.ModelCase do
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
       import LaurenHallWriting.ModelCase
+      import LaurenHallWriting.TestHelpers
     end
   end
 

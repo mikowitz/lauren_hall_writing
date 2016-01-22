@@ -6,20 +6,14 @@ defmodule LaurenHallWriting.BioController do
 
   plug :scrub_params, "bio" when action in [:create, :update]
 
-  def index(conn, _params) do
-    bios = Repo.all(Bio)
-    # render(conn, "index.html", bios: bios)
-    redirect(conn, to: bio_path(conn, :new))
-  end
-
   def new(conn, _params) do
-    case Repo.one(from b in Bio, limit: 1) do
+    case bio do
       nil ->
         changeset = Bio.changeset(%Bio{})
         render(conn, "new.html", changeset: changeset)
       bio ->
         conn
-        |> redirect(to: bio_path(conn, :edit, bio))
+        |> redirect(to: bio_path(conn, :edit))
     end
   end
 
@@ -30,41 +24,34 @@ defmodule LaurenHallWriting.BioController do
       {:ok, _bio} ->
         conn
         |> put_flash(:info, "Bio created successfully.")
-        |> redirect(to: bio_path(conn, :index))
+        |> redirect(to: bio_path(conn, :edit))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def edit(conn, %{"id" => id}) do
-    bio = Repo.get!(Bio, id)
-    changeset = Bio.changeset(bio)
-    render(conn, "edit.html", bio: bio, changeset: changeset)
+  def edit(conn, _params) do
+    case bio do
+      nil ->
+        redirect(conn, to: bio_path(conn, :new))
+      bio ->
+        changeset = Bio.changeset(bio)
+        render(conn, "edit.html", bio: bio, changeset: changeset)
+    end
   end
 
-  def update(conn, %{"id" => id, "bio" => bio_params}) do
-    bio = Repo.get!(Bio, id)
+  def update(conn, %{"bio" => bio_params}) do
     changeset = Bio.changeset(bio, bio_params)
 
     case Repo.update(changeset) do
       {:ok, bio} ->
         conn
         |> put_flash(:info, "Bio updated successfully.")
-        |> redirect(to: bio_path(conn, :edit, bio))
+        |> redirect(to: bio_path(conn, :edit))
       {:error, changeset} ->
         render(conn, "edit.html", bio: bio, changeset: changeset)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    bio = Repo.get!(Bio, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(bio)
-
-    conn
-    |> put_flash(:info, "Bio deleted successfully.")
-    |> redirect(to: bio_path(conn, :index))
-  end
+  def bio, do: Repo.one(from b in Bio, limit: 1)
 end
