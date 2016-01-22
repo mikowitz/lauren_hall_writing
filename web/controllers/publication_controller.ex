@@ -6,7 +6,7 @@ defmodule LaurenHallWriting.PublicationController do
   plug :scrub_params, "publication" when action in [:create, :update]
 
   def index(conn, _params) do
-    publications = Repo.all(from p in Publication, order_by: [asc: p.position])
+    publications = Repo.all(from p in Publication, order_by: [desc: p.position])
     render(conn, "index.html", publications: publications)
   end
 

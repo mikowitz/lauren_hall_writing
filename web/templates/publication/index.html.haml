@@ -15,13 +15,13 @@
         %td
           = if publication.position < LaurenHallWriting.Publication.last_position do
             = link to: publication_path(@conn, :update, publication, publication: [direction: :down]), method: :patch do
-              %i.fa.fa-caret-down
+              %i.fa.fa-caret-up
             - end
           - end
         %td
           = if publication.position > 1 do
             = link to: publication_path(@conn, :update, publication, publication: [direction: :up]), method: :patch do
-              %i.fa.fa-caret-up
+              %i.fa.fa-caret-down
             - end
           - end
     - end

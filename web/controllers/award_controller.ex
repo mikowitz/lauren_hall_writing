@@ -6,7 +6,7 @@ defmodule LaurenHallWriting.AwardController do
   plug :scrub_params, "award" when action in [:create, :update]
 
   def index(conn, _params) do
-    awards = Repo.all(from a in Award, order_by: [asc: a.position])
+    awards = Repo.all(from a in Award, order_by: [desc: a.position])
     render(conn, "index.html", awards: awards)
   end
 

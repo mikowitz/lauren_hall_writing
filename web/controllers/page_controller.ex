@@ -15,12 +15,12 @@ defmodule LaurenHallWriting.PageController do
   end
 
   def work(conn, _params) do
-    publications = Repo.all(from p in Publication, order_by: [asc: p.position])
+    publications = Repo.all(from p in Publication, order_by: [desc: p.position])
     render conn, "work.html", publications: publications
   end
 
   def awards(conn, _params) do
-    awards = Repo.all(from a in Award, order_by: [asc: a.position])
+    awards = Repo.all(from a in Award, order_by: [desc: a.position])
     render conn, "awards.html", awards: awards
   end
 
