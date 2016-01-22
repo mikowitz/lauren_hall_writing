@@ -6,6 +6,7 @@
       %th Award
       %th Position
       %th &nbsp;
+      %th &nbsp;
   %tbody
     = for award <- @awards do
       %tr
@@ -13,9 +14,14 @@
         %td= award.position
         %td
           = if award.position < LaurenHallWriting.Award.last_position do
-            Move down
+            = link to: award_path(@conn, :edit, award) do
+              %i.fa.fa-caret-down
+            - end
           - end
+        %td
           = if award.position > 1 do
-            Move up
+            = link to: award_path(@conn, :edit, award) do
+              %i.fa.fa-caret-up
+            - end
           - end
     - end
