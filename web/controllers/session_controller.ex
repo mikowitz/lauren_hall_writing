@@ -10,7 +10,7 @@ defmodule LaurenHallWriting.SessionController do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "Welcome!")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: page_path(conn, :about))
       {:error, _reason, conn} ->
         conn
         |> put_flash(:error, "Nope")
@@ -22,6 +22,6 @@ defmodule LaurenHallWriting.SessionController do
     conn
     |> LaurenHallWriting.Auth.logout()
     |> put_flash(:info, "Bye!")
-    |> redirect(to: page_path(conn, :index))
+    |> redirect(to: page_path(conn, :about))
   end
 end
