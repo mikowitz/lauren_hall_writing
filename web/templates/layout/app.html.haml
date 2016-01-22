@@ -11,7 +11,8 @@
     - css_path = static_path(@conn, "/css/app.css")
     %link(rel="stylesheet" href="#{css_path}")
     %script(type="text/javascript" src="//simonwaldherr.github.io/micromarkdown.js/dist/micromarkdown.min.js")
-    %script(src="/js/jquery.min.js")
+    - jquery_path = static_path(@conn, "/js/jquery.min.js")
+    %script(src="#{jquery_path}")
 
 
   %body
