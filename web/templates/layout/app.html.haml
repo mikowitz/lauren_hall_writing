@@ -10,6 +10,7 @@
 
     - css_path = static_path(@conn, "/css/app.css")
     %link(rel="stylesheet" href="#{css_path}")
+    %script(type="text/javascript" src="//simonwaldherr.github.io/micromarkdown.js/dist/micromarkdown.min.js")
     %script(src="/js/jquery.min.js")
 
 
@@ -25,6 +26,7 @@
               %ul.pager.admin
                 %li= @current_user.username
                 %li= link "edit bio", to: bio_path(@conn, :new)
+                %li= link "edit publications", to: publication_path(@conn, :index)
                 %li= link "edit awards", to: award_path(@conn, :index)
                 %li= link "sign out", to: session_path(@conn, :delete, @current_user), method: :delete
           - end

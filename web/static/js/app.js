@@ -20,10 +20,6 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 
 // import socket from "./socket"
 // import "node_modules/micromarkdown/micromarkdown"
-var mmd = require("micromarkdown");
-console.log(mmd.parse("**ok**"));
-console.log(mmd.parse("**OK**"));
-
 // var areas = document.getElementsByTagName("textarea");
 var areas = $("textarea");
 console.log(areas);
@@ -36,7 +32,7 @@ class MarkdownParser {
     parse() {
         var previewDiv = this.textarea.siblings(".preview");
         var val = this.textarea.val();
-        previewDiv.html(mmd.parse(val));
+        previewDiv.html(micromarkdown.parse(val));
     }
 }
 
@@ -49,3 +45,25 @@ $("textarea").on("change keyup blur", function() {
     var parser = new MarkdownParser(this);
     parser.parse();
 });
+
+
+$(".publication-form input").on("change keyup blur", function() {
+    previewPublication();
+});
+
+function previewPublication() {
+    var title = $(".pub-title").val();
+    var journal = $(".pub-journal").val();
+    var link = $(".pub-link").val();
+    var issue = $(".pub-issue").val();
+
+    var text = title + "  \n_[" + journal + "](" + link + ")_"
+    if (issue != "") {
+        text = text + ", " + issue;
+    }
+    $(".pub-preview").html(micromarkdown.parse(text));
+}
+
+if ($(".publication-form").length > 0) {
+    previewPublication();
+}
