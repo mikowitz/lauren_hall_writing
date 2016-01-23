@@ -1,1 +1,21 @@
-contact
+.h4 To contact Lauren, please fill out the form below. Thank you!
+
+.row
+  .col-xs-8.col-xs-offset-2
+    = form_for @conn, contact_path(@conn, :create), [as: :contact], fn f ->
+      .form-group
+        %label Name
+        = text_input f, :name, class: "form-control"
+
+      .form-group
+        %label Email
+        = text_input f, :email, class: "form-control"
+
+      .form-group
+        %label Message
+        = textarea f, :message, class: "form-control", rows: 5
+
+      .form-group
+        = submit "Send Lauren a message", class: "btn btn-primary"
+
+    - end

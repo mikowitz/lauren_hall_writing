@@ -29,3 +29,6 @@ config :phoenix, :generators,
   binary_id: false
 
 config :phoenix, :template_engines, haml: PhoenixHaml.Engine
+
+config :lauren_hall_writing, mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
+  mailgun_key: System.get_env("MAILGUN_API_KEY")

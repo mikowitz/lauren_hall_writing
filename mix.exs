@@ -39,6 +39,7 @@ defmodule LaurenHallWriting.Mixfile do
      {:gettext, "~> 0.9"},
      {:earmark, "~> 0.2.0"},
      {:comeonin, "~> 1.2"},
+     {:mailgun, "~> 0.1.1"},
      {:cowboy, "~> 1.0"}]
   end
 

@@ -25,6 +25,7 @@ defmodule LaurenHallWriting.Router do
     resources "/session", SessionController, only: [:new, :create, :delete]
 
     get "/admin", SessionController, :new
+    post "/contact", ContactController, :create
   end
 
   scope "/admin", LaurenHallWriting do
