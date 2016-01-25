@@ -38,6 +38,14 @@ defmodule LaurenHallWriting.Publication do
     end
   end
 
+  def move(model, direction) do
+    case direction do
+      "up" -> Publication.move_up(model)
+      "down" -> Publication.move_down(model)
+      _ -> raise "invalid direction passed to Publication.move"
+    end
+  end
+
   def move_up(model) do
     case Repo.get_by(Publication, position: model.position - 1) do
       nil ->

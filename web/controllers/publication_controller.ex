@@ -35,13 +35,8 @@ defmodule LaurenHallWriting.PublicationController do
   end
 
   def update(conn, %{"id" => id, "publication" => %{"direction" => direction}}) do
-    publication = Repo.get!(Publication, id)
-    case direction do
-      "up" ->
-        Publication.move_up(publication)
-      "down" ->
-        Publication.move_down(publication)
-    end
+    Repo.get!(Publication, id)
+    |> Publication.move(direction)
     redirect(conn, to: publication_path(conn, :index))
   end
 
@@ -53,21 +48,9 @@ defmodule LaurenHallWriting.PublicationController do
       {:ok, publication} ->
         conn
         |> put_flash(:info, "Publication updated successfully.")
-        |> redirect(to: publication_path(conn, :show, publication))
+        |> redirect(to: publication_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", publication: publication, changeset: changeset)
     end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    publication = Repo.get!(Publication, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(publication)
-
-    conn
-    |> put_flash(:info, "Publication deleted successfully.")
-    |> redirect(to: publication_path(conn, :index))
   end
 end
