@@ -4,11 +4,18 @@ defmodule LaurenHallWriting.ContactController do
   plug :scrub_params, "contact"
 
   def create(conn, %{"contact" => contact_params}) do
-    contact_params
-    |> LaurenHallWriting.Mailer.send_contact_email
+    case Dict.fetch(contact_params, "confirmation") do
+      {:ok, "IAMNOTAROBOT"} ->
+        contact_params
+        |> LaurenHallWriting.Mailer.send_contact_email
 
-    conn
-    |> put_flash(:info, "Thank you for contacting Lauren!")
-    |> redirect(to: page_path(conn, :about))
+        conn
+        |> put_flash(:info, "Thank you for contacting Lauren!")
+        |> redirect(to: page_path(conn, :about))
+      _ ->
+        conn
+        |> put_flash(:error, "Please prove that you are not a robot")
+        |> redirect(to: page_path(conn, :contact))
+    end
   end
 end

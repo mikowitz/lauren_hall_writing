@@ -16,6 +16,12 @@
         = textarea f, :message, class: "form-control", rows: 5
 
       .form-group
+        %div Please prove you are a human. Type
+        %span(style="padding: 5px; font-weight: bold;") IAMNOTAROBOT
+        into the text field below. Thanks!
+        = text_input f, :confirmation, class: "form-control"
+
+      .form-group
         = submit "Send Lauren a message", class: "btn btn-primary"
 
     - end
